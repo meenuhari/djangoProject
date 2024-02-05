@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <img src="{% static 'images/banner3.jpg' %}" height="450px" width="100%">
+</div>
+<div class="container-fluid mt-3" style="margin-bottom:100px;">
+    <h3 class="text-center fw-bold">Our Collections</h3>
+    <p style="text-align:justify;line-height:2;">
+A common form of Lorem ipsum reads: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
+    {% for i in p %}
+  <div class="col">
+    <div class="card">
+      <img src="{{i.image.url}}" height="200px" width="100%" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{i.name}}</h5>
+        <a href="{% url 'shop:allprod' i.name %}" style="position:relative;left:42%" class="btn btn-success">Product</a>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+
+{% endblock %}

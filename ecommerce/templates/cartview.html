@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-bottom:100px;">
+  <div class="row  ms-2 ">
+    <h4 class="text-center">Shopping Cart</h4>
+    <div class="col-6  ms-5">
+      <table class="table table-bordered text-center">
+        <tr>
+          <th colspan="5">Cart Items</th>
+        </tr>
+        {% for i in c %}
+
+        <tr>
+          <td><img src="{{i.product.image.url}}" height="150px" width="150px"></td>
+          <td>{{i.product.name}}</td>
+           <td><b>Product ID:{{i.product.id}}</b><br>
+               <b>Quantity:{{i.quantity}}</b><br>
+               <b>Subtotal:{{i.subtotal}}</b>
+           </td>
+            
+            <td>
+                {% if i.product.stock > 0 %}
+                <a href="{% url 'cart:addtocart' i.product.name %}"><i class="fa-solid fa-circle-plus text-danger"></i></a>
+
+            <a href="{% url 'cart:minuscart' i.product.name %}"><i class="fa-solid fa-circle-minus text-danger"></i></a>
+                <a href="{% url 'cart:delete' i.product.name %}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+                {% else %}
+                <a href="{% url 'cart:minuscart' i.product.name %}"><i class="fa-solid fa-circle-minus text-danger"></i></a>
+                <a href="{% url 'cart:delete' i.product.name %}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+              {% endif %}
+            </td>
+
+
+        </tr>
+   {% endfor %}
+
+      </table>
+
+    </div>
+     <div class="col-5 ms-3">
+      <table class="table table-bordered">
+        <tr>
+          <th colspan="4">Checkout</th>
+        </tr>
+
+          <tr>
+              <td>Total:{{t}}</td>
+          </tr>
+      </table>
+<a href="{% url 'cart:order' %}" class="btn btn-danger">Place Order</a>
+         <a href="{% url 'shop:category' %}" class="btn btn-danger" style="position:absolute;right:100px;">Continue Shopping</a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
