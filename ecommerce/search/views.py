@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from shop.models import Product
 
 
